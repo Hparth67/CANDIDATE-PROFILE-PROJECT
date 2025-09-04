@@ -1,5 +1,5 @@
 import express from 'express';
-import { health, getProfile, updateProfile, getProjectsBySkill, getTopSkills, searchAll } from '../controllers/profileController.js';
+import { health, getProfile, updateProfile, getProjectsBySkill, getTopSkills, searchAll, createProfile } from '../controllers/profileController.js';
 
 const router = express.Router();
 
@@ -9,5 +9,7 @@ router.put('/profile', updateProfile);
 router.get('/projects', getProjectsBySkill);
 router.get('/skills/top', getTopSkills);
 router.get('/search', searchAll);
+router.post('/profile', createProfile);
+
 
 export default router;

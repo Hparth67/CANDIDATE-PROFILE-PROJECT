@@ -142,3 +142,47 @@ export const searchAll = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
+
+export const createProfile = async (req, res) => {
+  const t = await sequelize.transaction();
+  try {
+    const { name, email, education, skills, projects, work, links } = req.body;
+
+    // Create new Profile
+    const profile = await Profile.create({ name, email, education }, { transaction: t });
+
+    // Create related data
+    if (skills && skills.length) {
+      const skillRows = skills.map(name => ({ profileId: profile.id, name }));
+      await Skill.bulkCreate(skillRows, { transaction: t });
+    }
+
+    if (projects && projects.length) {
+      const projectRows = projects.map(p => ({ ...p, profileId: profile.id }));
+      await Project.bulkCreate(projectRows, { transaction: t });
+    }
+
+    if (work && work.length) {
+      const workRows = work.map(w => ({ ...w, profileId: profile.id }));
+      await Work.bulkCreate(workRows, { transaction: t });
+    }
+
+    if (links) {
+      await Links.create({ ...links, profileId: profile.id }, { transaction: t });
+    }
+
+    await t.commit();
+
+    // Fetch the created profile with associations
+    const createdProfile = await Profile.findOne({
+      where: { id: profile.id },
+      include: [Skill, Project, Work, Links],
+    });
+
+    res.status(201).json({ message: 'Profile created', profile });
+  } catch (error) {
+    await t.rollback();
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
