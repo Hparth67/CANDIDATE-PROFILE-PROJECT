@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
+// const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+const BASE_URL = isLocalhost ? "http://localhost:5000" : process.env.REACT_APP_API_URL;
 
 
 function App() {
