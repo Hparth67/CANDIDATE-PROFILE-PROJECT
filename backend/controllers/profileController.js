@@ -179,7 +179,7 @@ export const createProfile = async (req, res) => {
       include: [Skill, Project, Work, Links],
     });
 
-    res.status(201).json({ message: 'Profile created', profile });
+    res.status(201).json({ message: 'Profile created', createdProfile });
   } catch (error) {
     await t.rollback();
     console.error(error);
