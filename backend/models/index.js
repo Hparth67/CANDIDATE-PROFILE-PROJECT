@@ -9,7 +9,7 @@ import LinksModel from './links.js';
 
 dotenv.config();
 
-const sequelize = new Sequelize(
+/* const sequelize = new Sequelize(
   process.env.DB_NAME, // database name
   process.env.DB_USER, // username
   process.env.DB_PASSWORD, // password
@@ -18,7 +18,19 @@ const sequelize = new Sequelize(
     dialect: 'postgres',
     logging: false,
   }
-);
+); */
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false  // Important for Render's managed PostgreSQL SSL
+    }
+  },
+  logging: false,
+});
 
 // Initialize models
 const Profile = ProfileModel(sequelize);
@@ -50,9 +62,11 @@ export {
 };
 
 //Test connections
-try {
-  await sequelize.authenticate();
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+})();
