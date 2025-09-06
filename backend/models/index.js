@@ -20,49 +20,6 @@ const sequelize = new Sequelize(
   }
 );
 
-/* const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  protocol: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false  // Important for Render's managed PostgreSQL SSL
-    }
-  },
-  logging: false,
-});
- */
-
-/* let sequelize;
-if (process.env.DATABASE_URL) {
-  console.log("Connecting to production database...");
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: "postgres",
-    protocol: "postgres",
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false, // Important for Render's managed PostgreSQL SSL
-      },
-    },
-    logging: false,
-  });
-} else {
-  // Local development configuration
-  console.log("Connecting to local database...");
-  sequelize = new Sequelize(
-    process.env.DB_NAME, // database name
-    process.env.DB_USER, // username
-    process.env.DB_PASSWORD, // password
-    {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT || 5432,
-      dialect: "postgres",
-      logging: console.log, // Enable logging for local development
-    }
-  );
-} */
-
 // Initialize models
 const Profile = ProfileModel(sequelize);
 const Skill = SkillModel(sequelize);
