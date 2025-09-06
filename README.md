@@ -1,6 +1,6 @@
 # Me-API Playground Project 
 
-## Link to the deployed website
+Link to the deployed website
 [<repository-url>](https://candidate-profile.onrender.com)
 
 ## Architecture
