@@ -9,8 +9,6 @@ import LinksModel from './links.js';
 
 dotenv.config();
 
-let sequelize;
-
 /* const sequelize = new Sequelize(
   process.env.DB_NAME, // database name
   process.env.DB_USER, // username
@@ -22,7 +20,7 @@ let sequelize;
   }
 ); */
 
-/* const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   protocol: 'postgres',
   dialectOptions: {
@@ -32,8 +30,10 @@ let sequelize;
     }
   },
   logging: false,
-}); */
+});
 
+
+/* let sequelize;
 if (process.env.DATABASE_URL) {
   console.log("Connecting to production database...");
   sequelize = new Sequelize(process.env.DATABASE_URL, {
@@ -61,7 +61,7 @@ if (process.env.DATABASE_URL) {
       logging: console.log, // Enable logging for local development
     }
   );
-}
+} */
 
 // Initialize models
 const Profile = ProfileModel(sequelize);
