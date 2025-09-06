@@ -20,7 +20,7 @@ dotenv.config();
   }
 ); */
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+/* const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   protocol: 'postgres',
   dialectOptions: {
@@ -31,9 +31,9 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   },
   logging: false,
 });
+ */
 
-
-/* let sequelize;
+let sequelize;
 if (process.env.DATABASE_URL) {
   console.log("Connecting to production database...");
   sequelize = new Sequelize(process.env.DATABASE_URL, {
@@ -61,7 +61,7 @@ if (process.env.DATABASE_URL) {
       logging: console.log, // Enable logging for local development
     }
   );
-} */
+}
 
 // Initialize models
 const Profile = ProfileModel(sequelize);
