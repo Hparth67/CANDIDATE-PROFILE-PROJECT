@@ -29,7 +29,7 @@ https://candidate-profile.onrender.com
 
 ### Local Setup
 1. Clone the repo
-   Run git clone [<repository-url>](https://github.com/Hparth67/CANDIDATE-PROFILE-PROJECT.git) to clone the project repository locally.
+   Run git clone https://github.com/Hparth67/CANDIDATE-PROFILE-PROJECT.git to clone the project repository locally.
 2. Install dependencies
    Navigate to the backend directory and run npm install to install backend dependencies.
    Navigate to the frontend directory and run npm install to install frontend dependencies.
